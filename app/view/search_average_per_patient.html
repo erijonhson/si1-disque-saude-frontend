@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="jumbotron">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <input type="text" class="form-control input-lg" id="unit_id" ng-model="unitId" placeholder="Pesquisar">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-2 col-lg-offset-5 col-md-3 col-md-offset-5 col-sm-3 col-sm-offset-5 col-xs-3 col-xs-offset-5">
+                    <button type="submit" class="btn btn-primary btn-lg" ng-click="searchAveragePerPatient(unitId)">
+                        <i class="fa fa-search"></i> Pesquisar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row-fluid">
+        <div class="col-lg-12">
+            <div class="row" ng-if="average">
+                <div class="col-lg-12">
+                    <h3>Média Médico Por Paciente da Unidade Pesquisada é de {{average}}</h3>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="vs">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Disque Saúde</title>
+        <meta name="description" content="Disque Saúde - SI1 2017.1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css">
+        <link rel="stylesheet" href="assets/css/main.css">
+        <link rel="stylesheet" href="assets/css/animate.css">
+        <link rel="stylesheet" href="assets/css/searchHealthUnit.css">
+        <link rel="stylesheet" type="text/css" href="bower_components/angular-toastr/dist/angular-toastr.css" />
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <nav class="navbar navbar-inverse">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <a class="navbar-brand" href="#/!"><i class="fa fa-medkit" aria-hidden="true"></i> VS</a>
+                            </div>
+                            <ul class="nav navbar-nav">
+                                <li><a href="#/!"><i class="fa fa-home"></i> Home</a></li>
+                                <li><a href="#!search_health_unit"><i class="fa fa-search"></i> Consultar Unidade de Saúde</a></li>
+                                <li><a href="#!searchcomplaint"><i class="fa fa-search"></i> Pesquisar Queixa</a></li>
+                                <li><a href="#!searchaverage"><i class="fa fa-search"></i> Pesquisar Média Médico por Paciente</a></li>
+                                <li><a href="#!generalSituationComplaints"><i class="fa fa-search"></i> Situação geral das queixas</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="#!/complaint/register"><i class="fa fa-plus"></i> Adicionar Queixa</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div ng-view=""></div>
+        </div>
+        <div ng-include="'view/include/footer.html'"></div>
+
+        <!-- Bower scripts: -->
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/jquery-ui/jquery-ui.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="bower_components/angular-messages/angular-messages.js"></script>
+        <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+
+        <!-- Application scripts: -->
+        <script src="core/app.js"></script>
+        <script src="core/app.routes.js"></script>
+        <script src="core/controller/mainCtrl.js"></script>
+    </body>
+</html>

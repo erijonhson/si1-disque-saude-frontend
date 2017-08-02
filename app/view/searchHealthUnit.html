@@ -1,0 +1,38 @@
+<div class="container center">
+    <div class="jumbotron">
+        <form name="searchHUForm" class="form-horizontal">
+            <div for="inputNeighborhood" class="form-group">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <input type="text" class="form-control input-lg" ng-model="neighborhood" id="inputNeighborhood" placeholder="Digite o bairro em que se encontra a unidade de saúde">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-2 col-lg-offset-5 col-md-3 col-md-offset-5 col-sm-3 col-sm-offset-5 col-xs-3 col-xs-offset-5">
+                    <button class="btn btn-primary btn-lg" ng-click="searchHU(neighborhood)"><i class="fa fa-search"></i> Pesquisar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row-fluid">
+        <div class="col-lg-12">
+            <ul class="list-group">
+                <div class="list-group-item row" ng-repeat="unit in units">
+                    <div class="col-lg-12">
+                        <h2 class="text-info">Unidade do Bairro: {{unit.descricao}}</h2>
+                        <p>Código: {{unit.codigo}}</p>
+                        <p>Tipo: {{unit.type}}</p>
+                        <p>Número de medicos: {{unit.numeroMedicos}}</p>
+                        <p>Número de pacientes por dia: {{unit.numeroPacientesDia}}</p>
+                        <p>Especialidades da unidade de saúde:
+                            <span class="badge badge-default" ng-repeat="esp in unit.especialidades">
+                                <b>{{esp.descricao}}</b>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<div class="container center-block">
+    <div>
+         <form name="complaintForm">
+            <div class="col-md-5 col-md-offset-3">
+                <fieldset>
+                    <legend>Dados da Queixa</legend>
+                    <!--Description field-->
+                    <div class="form-group row">
+                        <label for="inputDescription" class="col-sm-2 col-form-label">Descrição:</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" name="description" id="inputDescription" ng-model="complaint.descricao"></textarea>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Dados do solicitante</legend>
+                    <!--Name field-->
+                    <div class="form-group row">
+                        <label for="inputName" class="col-sm-2 col-form-label">Nome:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="name" id="inputName" ng-model="complaint.solicitante.nome">
+                        </div>
+                    </div>
+                    <!--Email field-->
+                    <div class="form-group row">
+                        <label for="inputEmail" class="col-sm-2 col-form-label">Email:</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" name="email" id="inputEmail" ng-model="complaint.solicitante.email">
+                        </div>
+                    </div>
+                    <legend>Endereço do estabelecimento</legend>
+                    <!--Street field-->
+                    <div class="form-group row">
+                        <label for="inputStreet" class="col-sm-2 col-form-label">Rua:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="street" id="inputStreet" ng-model="complaint.solicitante.rua">
+                        </div>
+                    </div>
+                    <!--City field-->
+                    <div class="form-group row">
+                        <label for="inputCity" class="col-sm-2 col-form-label">Cidade:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="city" id="inputCity" ng-model="complaint.solicitante.cidade">
+                        </div>
+                    </div>
+                    <!--UF field-->
+                    <div class="form-group row">
+                        <label for="inputUf" class="col-sm-2 col-form-label">UF:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="uf" id="inputUf" ng-model="complaint.solicitante.uf">
+                        </div>
+                    </div>
+                </fieldset>
+                <button class="btn btn-primary btn-block" ng-click="registerComplaint(complaint)">Adicionar Queixa</button>
+            </div>
+        </form>
+    </div>
+</div>

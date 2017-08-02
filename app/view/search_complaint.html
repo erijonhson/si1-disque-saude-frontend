@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="jumbotron">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <input type="text" class="form-control input-lg" id="complaint_id" ng-model="complaintId" placeholder="Pesquisar">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-2 col-lg-offset-5 col-md-3 col-md-offset-5 col-sm-3 col-sm-offset-5 col-xs-3 col-xs-offset-5">
+                    <button type="submit" class="btn btn-primary btn-lg" ng-click="searchComplaint(complaintId)">
+                        <i class="fa fa-search"></i> Pesquisar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row-fluid">
+        <div class="col-lg-12">
+            <div class="row" ng-if="complaint">
+                <div class="col-lg-12">
+                    <h2 class="text-info">{{complaint.descricao}}</h2>
+                    <p>Situação: <span class="badge">{{complaint.situacao}}</span></p>
+                    <p>Solicitante</p>
+                    <ul class="list-group">
+                        <li class="list-group-item"><b>Nome: </b> {{complaint.solicitante.nome}}</li>
+                        <li class="list-group-item"><b>Email: </b> {{complaint.solicitante.email}}</li>
+                        <li class="list-group-item"><b>Rua: </b> {{complaint.solicitante.rua}}</li>
+                        <li class="list-group-item"><b>Cidade: </b> {{complaint.solicitante.cidade}}</li>
+                        <li class="list-group-item"><b>UF: </b> {{complaint.solicitante.uf}}</li>
+                    </ul>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
