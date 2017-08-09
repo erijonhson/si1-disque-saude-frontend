@@ -1,7 +1,7 @@
-app.controller("registerComplaintCtrl", function ($scope, $http, toastr, $location) {
+app.controller("registerComplaintCtrl", function ($scope, $http, toastr, $location, endPointsService) {
 
     $scope.registerComplaint = function (complaint) {
-        $http.post("https://disque-saude-backend.herokuapp.com/SpringBootRestApi/api/queixa/", JSON.stringify(complaint))
+        $http.post(endPointsService.api + "/queixa/", JSON.stringify(complaint))
             .then(function success(response) {
                 toastr.success("Queixa adicionada com sucesso!");
                 $location.path('/createdcomplaint/' + response.data.id);
@@ -12,12 +12,12 @@ app.controller("registerComplaintCtrl", function ($scope, $http, toastr, $locati
     }
 });
 
-app.controller("searchAverangeCtrl", function ($scope, $http) {
+app.controller("searchAverangeCtrl", function ($scope, $http, endPointsService) {
 
     $scope.average = null;
 
     $scope.searchAveragePerPatient = function (id) {
-        $http.get("https://disque-saude-backend.herokuapp.com/SpringBootRestApi/api/geral/medicos/" + id).then(function successCallback(response) {
+        $http.get(endPointsService.api + "/geral/medicos/" + id).then(function successCallback(response) {
             $scope.average = response.data.obj;
         }, function errorCallback(error) {
             console.log("Unidade Não Encontrada");
@@ -25,11 +25,11 @@ app.controller("searchAverangeCtrl", function ($scope, $http) {
     }
 });
 
-app.controller("searchComplaintCtrl", function ($scope, $http) {
+app.controller("searchComplaintCtrl", function ($scope, $http, endPointsService) {
     $scope.complaint;
 
     $scope.searchComplaint = function (id) {
-        $http.get("https://disque-saude-backend.herokuapp.com/SpringBootRestApi/api/queixa/" + id).then(function successCallback(response) {
+        $http.get(endPointsService.api + "/queixa/" + id).then(function successCallback(response) {
             $scope.complaint = response.data;
         }, function errorCallback(error) {
             $scope.complaint = null;
@@ -38,12 +38,12 @@ app.controller("searchComplaintCtrl", function ($scope, $http) {
     }
 });
 
-app.controller("searchHealthUnitCtrl", function ($scope, $http) {
+app.controller("searchHealthUnitCtrl", function ($scope, $http, endPointsService) {
 
     $scope.units = [];
 
     $scope.searchHU = function (neighborhood) {
-        $http.get("https://disque-saude-backend.herokuapp.com/SpringBootRestApi/api/unidade/busca?bairro=" + neighborhood)
+        $http.get(endPointsService.api + "/unidade/busca?bairro=" + neighborhood)
             .then(function success(response) {
                 $scope.units = [];
                 $scope.units.push(response.data);
@@ -56,12 +56,12 @@ app.controller("searchHealthUnitCtrl", function ($scope, $http) {
     }
 });
 
-app.controller("generalSituationComplaintsCtrl", function ($scope, $http) {
+app.controller("generalSituationComplaintsCtrl", function ($scope, $http, endPointsService) {
 
     $scope.situation = "";
 
     var getGeneralSituationComplaints = function (neighborhood) {
-        $http.get("https://disque-saude-backend.herokuapp.com/SpringBootRestApi/api/geral/situacao")
+        $http.get(endPointsService.api + "/geral/situacao")
             .then(function success(response) {
                 console.log(response.data.obj);
 
