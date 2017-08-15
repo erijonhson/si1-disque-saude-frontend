@@ -4,6 +4,8 @@
             <div class="col-md-5 col-md-offset-3">
                 <fieldset>
                     <legend>Dados da Queixa</legend>
+                    <!-- Div de teste abaixo-->
+                    <!-- <div>{{complaint}}</div> -->
                     <!--Description field-->
                     <div class="form-group row">
                         <label for="inputDescription" class="col-sm-2 col-form-label">Descrição:</label>
@@ -33,21 +35,21 @@
                     <div class="form-group row">
                         <label for="inputStreet" class="col-sm-2 col-form-label">Rua:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="street" id="inputStreet" ng-model="complaint.solicitante.rua">
+                            <input type="text" class="form-control" name="street" id="inputStreet" ng-model="complaint.endereco.rua">
                         </div>
                     </div>
                     <!--City field-->
                     <div class="form-group row">
                         <label for="inputCity" class="col-sm-2 col-form-label">Cidade:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="city" id="inputCity" ng-model="complaint.solicitante.cidade">
+                            <input type="text" class="form-control" name="city" id="inputCity" ng-model="complaint.endereco.cidade">
                         </div>
                     </div>
                     <!--UF field-->
                     <div class="form-group row">
                         <label for="inputUf" class="col-sm-2 col-form-label">UF:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="uf" id="inputUf" ng-model="complaint.solicitante.uf">
+                            <input type="text" class="form-control" name="uf" id="inputUf" ng-model="complaint.endereco.uf">
                         </div>
                     </div>
                 </fieldset>

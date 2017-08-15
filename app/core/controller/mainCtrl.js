@@ -3,6 +3,7 @@ app.controller("registerComplaintCtrl", function ($scope, $http, toastr, $locati
     $scope.registerComplaint = function (complaint) {
         $http.post(endPointsService.api + "/queixa/", JSON.stringify(complaint))
             .then(function success(response) {
+                // add mensage
                 toastr.success("Queixa adicionada com sucesso!");
                 $location.path('/createdcomplaint/' + response.data.id);
             }, function error(error) {
