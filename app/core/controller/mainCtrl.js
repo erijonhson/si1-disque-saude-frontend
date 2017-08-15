@@ -27,9 +27,9 @@ app.controller("searchAverangeCtrl", function ($scope, $http, endPointsService) 
 });
 
 app.controller("searchComplaintCtrl", function ($scope, $http, endPointsService) {
-    $scope.complaint;
-
+    
     $scope.searchComplaint = function (id) {
+        console.log(id);
         $http.get(endPointsService.api + "/queixa/" + id).then(function successCallback(response) {
             $scope.complaint = response.data;
         }, function errorCallback(error) {
