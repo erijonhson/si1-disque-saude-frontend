@@ -27,10 +27,21 @@
                     <ul class="list-group">
                         <li class="list-group-item"><b>Nome: </b> {{complaint.solicitante.nome}}</li>
                         <li class="list-group-item"><b>Email: </b> {{complaint.solicitante.email}}</li>
-                        <li class="list-group-item"><b>Rua: </b> {{complaint.solicitante.rua}}</li>
-                        <li class="list-group-item"><b>Cidade: </b> {{complaint.solicitante.cidade}}</li>
-                        <li class="list-group-item"><b>UF: </b> {{complaint.solicitante.uf}}</li>
                     </ul>
+                    <p>Estabelecimento</p>
+                    <ul class="list-group">
+                        <li class="list-group-item"><b>Rua: </b> {{complaint.endereco.rua}}</li>
+                        <li class="list-group-item"><b>Cidade: </b> {{complaint.endereco.cidade}}</li>
+                        <li class="list-group-item"><b>UF: </b> {{complaint.endereco.uf}}</li>
+                    </ul>
+                    <div ng-if="complaint.comentarios">
+                        <p>Comentários</p>
+                        <ul class="list-group">
+                            <div name="comentario" ng-repeat="comentario in complaint.comentarios">
+
+                            </div>
+                        </ul>
+                    </div>
                     <hr>
                 </div>
             </div>
