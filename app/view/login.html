@@ -1,41 +1,24 @@
 <!-- http://jasonwatmore.com/post/2015/03/10/angularjs-user-registration-and-login-example-tutorial -->
 
-<div class="col-md-6 col-md-offset-3">
-    <h2>Entrar no Disque Saúde</h2>
-    <form name="form" ng-submit="$ctrl.login()" role="form">
-        <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
-            <label for="username">Email</label>
-            <input type="email" name="username" id="username" class="form-control" ng-model="$ctrl.administrador.email" placeholder="Email" required />
-            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Email obrigatório</span>
-        </div>
-        <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
-            <label for="password">Senha</label>
-            <input type="password" name="password" id="password" class="form-control" ng-model="$ctrl.administrador.senha" placeholder="Senha" required />
-            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Senha obrigatória</span>
-        </div>
-        <div class="form-actions">
-            <button type="submit" ng-disabled="form.$invalid || $ctrl.dataLoading" class="btn btn-primary">Entrar</button>
-            <img ng-if="$ctrl.dataLoading" src="img/waiting.gif" />
-            <a href="#!/register" class="btn btn-link">Cadastrar</a>
-        </div>
-    </form>
-</div>
-</div>
-
-<!-- 
-<div class="container">
-  <form class="form-signin">
-    <h2 class="form-signin-heading">Entrar no Series Flix</h2>
-    <label for="inputEmail" class="sr-only">Email</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="Endereço de Email" required autofocus>
-    <label for="inputPassword" class="sr-only">Senha</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Senha" required>
-    <div class="checkbox">
-      <label>
-        <input type="checkbox" value="remember-me"> Lembrar-me
-      </label>
+<div class="container center">
+    <div class="col-md-6 col-md-offset-3">
+        <h2>Entrar no Disque Saúde</h2>
+        <form name="form" ng-submit="$ctrl.login()" role="form">
+            <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+                <label for="username">Email</label>
+                <input type="email" name="username" id="username" class="form-control" ng-model="$ctrl.administrador.email" placeholder="Email" required />
+                <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Email obrigatório</span>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+                <label for="password">Senha</label>
+                <input type="password" name="password" id="password" class="form-control" ng-model="$ctrl.administrador.senha" placeholder="Senha" required />
+                <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Senha obrigatória</span>
+            </div>
+            <div class="form-actions">
+                <button type="submit" ng-disabled="form.$invalid || $ctrl.dataLoading" class="btn btn-primary">Entrar</button>
+                <img ng-if="$ctrl.dataLoading" src="img/waiting.gif" />
+                <a href="#!/register" class="btn btn-link">Cadastrar</a>
+            </div>
+        </form>
     </div>
-    <button class="btn btn-lg btn-basic btn-block" type="submit">Entrar</button>
-  </form>
 </div>
--->
