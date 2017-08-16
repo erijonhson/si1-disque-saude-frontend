@@ -35,6 +35,7 @@
                         <li class="list-group-item"><b>Cidade: </b> {{complaint.endereco.cidade}}</li>
                         <li class="list-group-item"><b>UF: </b> {{complaint.endereco.uf}}</li>
                     </ul>
+                    <hr>
                     <!-- TODO : adicionar a este espaco comentarios após conclusão do backend -->
                     <div>
                         <p>Comentários</p>
@@ -48,12 +49,11 @@
                     </div>
                     <div>
                         <p>Adicionar comentário</p>
-                        <form name="novoComentario">
-                            <textarea class="form-control" name="novoComentario" ng-model="novoComentario.descricao" required>
-                            </textarea>
+                        <form name="novoComentarioForm" >
+                            <textarea class="form-control" name="novoComentario" ng-trim="true" ng-model="novoComentario.descricao" required></textarea>
                         </form>
                         <br>
-                        <button class="btn btn-primary btn-block" ng-disabled="novoComentario.$invalid" ng-click="adicionarComentarioQueixa(novoComentario.descricao, complaint.id)">
+                        <button class="btn btn-primary btn-block" ng-disabled="novoComentarioForm.$invalid" ng-click="adicionarComentarioQueixa(novoComentario.descricao, complaint.id)">
                             Adicionar Comentário
                         </button>
                     </div>

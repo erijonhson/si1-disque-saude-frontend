@@ -46,32 +46,34 @@
         }
 
         var buscaComentarioQueixa = function(id) {
-            var result = {data : undefined}
             console.log(endPointsService.api+ "/queixa/comentario/"+id);
-            return $http.get(endPointsService.api+ "/queixa/comentario/"+id).then(function successCallback(response) {
+            $http.get(endPointsService.api+ "/queixa/comentario/"+id).then(function successCallback(response) {
                 $scope.complaint.comentarios = response.data;
             }, function errorCallback(error) {
                 console.log("nao encontrou comentarios");
-                return result;
             });
         }
-
+        
+        // REMOVER ESTA GAMBS
+        $scope.novoComentario = {descricao : ''};
+        
         $scope.adicionarComentarioQueixa = function(descricao, id) {
-            $http.post(endPointsService.api + "/queixa/comentario/"+id, JSON.stringify(descricao))
+
+            var copiaDescricao = angular.copy(descricao);
+            console.log($scope.novoComentario);
+
+            $http.post(endPointsService.api + "/queixa/comentario/"+id, JSON.stringify(copiaDescricao))
             .then(function success(response) {
                     // add mensage
                     toastr.success("Comentário adicionado com sucesso!");
-                    limparCampo("textarea[name = novoComentario]")
                     buscaComentarioQueixa(id);
+                    $scope.novoComentario.descricao = '';
                 }, function error(error) {
                     console.log(error);
                     console.log("Problemas ao tentar adicionar comentario");
                 });
         }
 
-        var limparCampo = function(campo) {
-            $(campo).val("");
-        };
     });
     
     app.controller("searchHealthUnitCtrl", function ($scope, $http, endPointsService) {
