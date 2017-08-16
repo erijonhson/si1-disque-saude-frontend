@@ -46,6 +46,17 @@
                             </div>
                         </ul>
                     </div>
+                    <div>
+                        <p>Adicionar comentário</p>
+                        <form name="novoComentario">
+                            <textarea class="form-control" name="novoComentario" ng-model="novoComentario.descricao" required>
+                            </textarea>
+                        </form>
+                        <br>
+                        <button class="btn btn-primary btn-block" ng-disabled="novoComentario.$invalid" ng-click="adicionarComentarioQueixa(novoComentario.descricao, complaint.id)">
+                            Adicionar Comentário
+                        </button>
+                    </div>
                     <hr>
                 </div>
             </div>
