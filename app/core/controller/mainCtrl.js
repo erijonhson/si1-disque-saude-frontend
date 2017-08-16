@@ -32,9 +32,23 @@ app.controller("searchComplaintCtrl", function ($scope, $http, endPointsService)
         console.log(id);
         $http.get(endPointsService.api + "/queixa/" + id).then(function successCallback(response) {
             $scope.complaint = response.data;
+            buscaComentarioQueixa(id);
+            console.log($scope.complaint);
+            console.log("----");
         }, function errorCallback(error) {
             $scope.complaint = null;
             console.log(error);
+        });
+    }
+
+    var buscaComentarioQueixa = function(id) {
+        var result = {data : undefined}
+        console.log(endPointsService.api+ "/queixa/comentario/"+id);
+        return $http.get(endPointsService.api+ "/queixa/comentario/"+id).then(function successCallback(response) {
+            $scope.complaint.comentarios = response.data;
+        }, function errorCallback(error) {
+            console.log("nao encontrou comentarios");
+            return result;
         });
     }
 });

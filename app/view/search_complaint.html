@@ -34,11 +34,14 @@
                         <li class="list-group-item"><b>Cidade: </b> {{complaint.endereco.cidade}}</li>
                         <li class="list-group-item"><b>UF: </b> {{complaint.endereco.uf}}</li>
                     </ul>
-                    <div ng-if="complaint.comentarios">
+                    <!-- TODO : adicionar a este espaco comentarios após conclusão do backend -->
+                    <div>
                         <p>Comentários</p>
                         <ul class="list-group">
-                            <div name="comentario" ng-repeat="comentario in complaint.comentarios">
-
+                            <div name="comentario">
+                                <li class="list-group-item" ng-repeat="comentario in complaint.comentarios">
+                                    {{comentario.descricao}}
+                                </li>
                             </div>
                         </ul>
                     </div>
