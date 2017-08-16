@@ -5,8 +5,9 @@
 	'use strict';
 
 	app.controller('loginCtrl', ['$location', 'endPointsService', 'toastr',
-	function serieController($location, endPointsService, toastr) {
+	function loginCtrl($location, endPointsService, toastr) {
 		var ctrl = this;
+		ctrl.f = {AAAAAAAAAAAAA};
 		ctrl.administrador = {};
 		ctrl.dataLoading = false;
 		ctrl.login = function () {

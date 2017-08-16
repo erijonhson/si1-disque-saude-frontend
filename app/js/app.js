@@ -3,8 +3,8 @@
 		.config(config)
 		.run(run);
 
-	config.$inject = ['$locationProvider', '$routeProvider', '$httpProvider'];
-	function config($locationProvider, $routeProvider, $httpProvider) {
+	config.$inject = ['$locationProvider', '$routeProvider', '$httpProvider', '$provide'];
+	function config($locationProvider, $routeProvider, $httpProvider, $provide) {
 
 		$routeProvider.
 		when("/",{
@@ -45,6 +45,28 @@
 		otherwise({
 			redirectTo: '/'
 		});
+
+		function tokenInterceptor($q, $location, $rootScope) {
+			return {
+				'request': function(config){
+					const admin = localStorage.getItem('admin');
+					if (admin && config.url.includes("/administrador")) {
+						config.headers.Authorization = 'Bearer ' + admin.token;
+					}
+					return config;
+				},
+				'responseError': function (rejection){
+					if(rejection.status === 401){
+						$location.path("/login");
+					}
+					return rejection;
+				}
+			}
+		}
+
+		$provide.factory('tokenInterceptor', ['$q', '$location', '$rootScope', tokenInterceptor]);
+
+		$httpProvider.interceptors.push("tokenInterceptor");
 	}
 
 	run.$inject = ['$rootScope', '$location', '$http', 'endPointsService'];
