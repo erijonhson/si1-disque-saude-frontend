@@ -4,7 +4,7 @@
 
 	'use strict';
 
-	app.controller('loginCtrl', ['$location', 'endPointsService', 'toastr',
+	app.controller('registerCtrl', ['$location', 'endPointsService', 'toastr',
 	function serieController($location, endPointsService, toastr) {
 		var ctrl = this;
 		ctrl.administrador = {};
@@ -13,14 +13,14 @@
 			ctrl.dataLoading = true;
 			const usuario = angular.copy(ctrl.administrador);
 			usuario.senha = md5(usuario.senha);
-			$http.post(endPointsService.api + "/login/administrador/", usuario)
+			$http.post(endPointsService.api + "/cadastrar/administrador/", usuario)
 				.then(function success(response) {
-					toastr.success("Bem vindo administrador!");
+					toastr.success("Administrador cadastrado com sucesso!");
 					localStorage.setItem('admin', response.data);
-					$location.path('/home_admin');
+					$location.path('/login');
 				}, function error(error) {
 					console.log(error.causa);
-					toastr.error(error.causa);
+					toastr.error(error.causa | 'Erro no cadastro! Tente novamente mais tarde.');
 					ctrl.dataLoading = false;
 				});
 		};

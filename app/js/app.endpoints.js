@@ -1,10 +1,12 @@
 (function () {
 
+	'use strict';
+
 	app.service("endPointsService", function () {
 
 		var ctrl = this;
 
-		ctrl.authorized = ['/queixa/*', '/geral/medicos/', '/unidade/busca?bairro=', '/geral/situacao/'];
+		ctrl.unauthorized = ['/administrador/'];
 
 		// remoto
 		// ctrl.api = 'https://disque-saude-backend.herokuapp.com/SpringBootRestApi/api';

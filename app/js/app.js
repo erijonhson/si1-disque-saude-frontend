@@ -1,12 +1,10 @@
-(function () {
-
-	const app = angular.module(
+	var app = angular.module(
 		"vs", ["ngRoute", "ngMessages","ngAnimate", "toastr"])
 		.config(config)
 		.run(run);
 
 	config.$inject = ['$locationProvider', '$routeProvider', '$httpProvider'];
-	function config config($locationProvider, $routeProvider, $httpProvider) {
+	function config($locationProvider, $routeProvider, $httpProvider) {
 
 		$routeProvider.
 		when("/",{
@@ -36,6 +34,14 @@
 			templateUrl : "view/generalSituationComplaints.html",
 			controller : "generalSituationComplaintsCtrl"
 		}).
+		when("/login",{
+			templateUrl: "view/login.html",
+			controller : "loginCtrl"
+		}).
+		when("/register",{
+			templateUrl: "view/register.html",
+			controller : "registerCtrl"
+		}).
 		otherwise({
 			redirectTo: '/'
 		});
@@ -46,13 +52,11 @@
 
 		$rootScope.$on('$locationChangeStart', function (event, next, current) {
 			// redirect to login page if not logged in and trying to access a restricted page
-			const restrictedPage = $.inArray($location.path(), endPointsService.authorized) === -1;
+			const authorizedPage = $.inArray($location.path(), endPointsService.unauthorized) === -1;
 			const loggedIn = localStorage.getItem('admin');
-			if (restrictedPage && !loggedIn) {
+			if (!authorizedPage && !loggedIn) {
 				$location.path('/login');
 			}
 		});
 
 	}
-
-})();
