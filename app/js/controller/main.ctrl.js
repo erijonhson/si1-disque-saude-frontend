@@ -14,7 +14,7 @@
 		}
 	});
 
-	app.controller("registerComplaintCtrl", function ($http, toastr, $location, endPointsService) {
+	app.controller("registerComplaintCtrl", function ($http, $location, toastr, endPointsService) {
 		var ctrl = this;
 		ctrl.registerComplaint = function (complaint) {
 			$http.post(endPointsService.api + "/queixa/", JSON.stringify(complaint))
@@ -22,27 +22,26 @@
 					// add mensage
 					toastr.success("Queixa adicionada com sucesso!");
 					$location.path('/createdcomplaint/' + response.data.id);
-				}, function error(error) {
-					console.log(error);
-					console.log("Problemas ao tentar adicionar queixa.");
+				}).catch(function error(error) {
+					toastr.error(error.data.causa || "Problemas ao tentar adicionar queixa.");
 				});
 		}
 	});
 	
-	app.controller("searchAverangeCtrl", function ($scope, $http, endPointsService) {
+	app.controller("searchAverangeCtrl", function ($scope, $http, toastr, endPointsService) {
 
 		$scope.average = null;
 
 		$scope.searchAveragePerPatient = function (id) {
 			$http.get(endPointsService.api + "/geral/medicos/" + id).then(function successCallback(response) {
 				$scope.average = response.data.obj;
-			}, function errorCallback(error) {
-				console.log("Unidade Não Encontrada");
+			}).catch(function error(error) {
+				toastr.error(error.data.causa || "Unidade não Encontrada");
 			});
 		}
 	});
 	
-	app.controller("searchComplaintCtrl", function ($scope, $http, endPointsService, toastr) {
+	app.controller("searchComplaintCtrl", function ($scope, $http, toastr, endPointsService) {
 
 		$scope.searchComplaint = function (id) {
 			console.log(id);
@@ -51,24 +50,24 @@
 				buscaComentarioQueixa(id);
 				console.log($scope.complaint);
 				console.log("----");
-			}, function errorCallback(error) {
+			}).catch(function error(error) {
 				$scope.complaint = null;
-				console.log(error);
+				toastr.error(error.data.causa);
 			});
 		}
 
 		var buscaComentarioQueixa = function(id) {
-			console.log(endPointsService.api+ "/queixa/comentario/"+id);
-			$http.get(endPointsService.api+ "/queixa/comentario/"+id).then(function successCallback(response) {
+			console.log(endPointsService.api+ "/queixa/comentario/" + id);
+			$http.get(endPointsService.api+ "/queixa/comentario/" + id).then(function successCallback(response) {
 				$scope.complaint.comentarios = response.data;
-			}, function errorCallback(error) {
-				console.log("nao encontrou comentarios");
+			}).catch(function error(error) {
+				toastr.error(error.data.causa || "Sem comentários!");
 			});
 		}
-		
+
 		// REMOVER ESTA GAMBS
 		$scope.novoComentario = {descricao : ''};
-		
+
 		$scope.adicionarComentarioQueixa = function(descricao, id) {
 
 			var copiaDescricao = angular.copy(descricao);
@@ -80,15 +79,14 @@
 					toastr.success("Comentário adicionado com sucesso!");
 					buscaComentarioQueixa(id);
 					$scope.novoComentario.descricao = '';
-				}, function error(error) {
-					console.log(error);
-					console.log("Problemas ao tentar adicionar comentario");
+				}).catch(function error(error) {
+					toastr.error(error.data.causa || "Problemas ao adicionar comentário");
 				});
 		}
 
 	});
 	
-	app.controller("searchHealthUnitCtrl", function ($scope, $http, endPointsService) {
+	app.controller("searchHealthUnitCtrl", function ($scope, $http, toastr, endPointsService) {
 
 		$scope.units = [];
 
@@ -99,14 +97,13 @@
 				$scope.units.push(response.data);
 				console.log("Foram encontradas Unidades de saúde");
 				console.log(response.data);
-			}, function failed(error) {
-				console.log("Erro na busca de unidades");
-				console.log(error.data.errorMessage);
+			}).catch(function error(error) {
+				toastr.error(error.data.causa || "Erro na busca de unidades");
 			});
 		}
 	});
 	
-	app.controller("generalSituationComplaintsCtrl", function ($scope, $http, endPointsService) {
+	app.controller("generalSituationComplaintsCtrl", function ($scope, $http, toastr, endPointsService) {
 
 		$scope.situation = "";
 
@@ -135,9 +132,8 @@
 					};
 
 				}
-			}, function failed(error) {
-				console.log("Erro na busca de unidades");
-				console.log(error.data.errorMessage);
+			}).catch(function error(error) {
+				toastr.error(error.data.causa || "Erro na busca de unidades");
 			});
 		}
 
