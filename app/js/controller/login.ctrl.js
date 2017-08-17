@@ -16,7 +16,7 @@
 			usuario.senha = md5(usuario.senha);
 			$http.post(endPointsService.api + "/admin/login/", usuario)
 				.then(function success(response) {
-					toastr.success("Bem vindo " + response.data.nome + "!");
+					toastr.success("Bem vindo " + response.data.administrador.nome + "!");
 					localStorage.setItem('admin', JSON.stringify(response.data));
 					$location.path('/admin');
 				}).catch(function error(error) {

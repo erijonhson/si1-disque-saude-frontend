@@ -40,7 +40,7 @@ function config($locationProvider, $routeProvider, $httpProvider, $provide) {
 	}).
 	when("/register",{
 		templateUrl: "view/register.html",
-		controller : "registerCtrl"
+		controller : "loginCtrl"
 	}).
 	otherwise({
 		redirectTo: '/'
