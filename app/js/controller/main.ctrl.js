@@ -107,18 +107,17 @@
 
 		$scope.situation = "";
 
-		var getGeneralSituationComplaints = function (neighborhood) {
+		var getGeneralSituationComplaints = function () {
 			$http.get(endPointsService.api + "/geral/situacao")
 			.then(function success(response) {
-				console.log(response.data.obj);
 
-				if(response.data.obj == 0){
+				if(response.data == 0) {
 					$scope.situation = {
 						status: "RUIM",
 						color: "label-danger"
 					};
 
-				} else if(response.data.obj == 1){
+				} else if(response.data == 1) {
 
 					$scope.situation = {
 						status: "REGULAR",
