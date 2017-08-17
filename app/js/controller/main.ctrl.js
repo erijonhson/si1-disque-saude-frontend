@@ -2,6 +2,18 @@
 
 	'use strict';
 
+	app.controller("mainToolbarCtrl", function (adminService, toastr) {
+		var ctrl = this;
+		ctrl.adminEstaLogado = function () {
+			return !!adminService.getAdminLogado();
+		}
+		ctrl.logout = function () {
+			const admin = adminService.getAdminLogado();
+			adminService.logout();
+			toastr.success("Até breve " + admin.administrador.nome + "!");
+		}
+	});
+
 	app.controller("registerComplaintCtrl", function ($http, toastr, $location, endPointsService) {
 		var ctrl = this;
 		ctrl.registerComplaint = function (complaint) {

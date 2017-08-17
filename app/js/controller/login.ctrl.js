@@ -4,40 +4,34 @@
 
 	'use strict';
 
-	app.controller('loginCtrl', ['$http', '$location', 'endPointsService', 'toastr',
-	function loginCtrl($http, $location, endPointsService, toastr) {
+	app.controller('loginCtrl', ['$location', 'toastr', 'adminService',
+	function loginCtrl($location, toastr, adminService) {
 
 		var ctrl = this;
 		ctrl.dataLoading = false;
 
 		ctrl.login = function (administrador) {
-			ctrl.dataLoading = true;
-			const usuario = angular.copy(administrador);
-			usuario.senha = md5(usuario.senha);
-			$http.post(endPointsService.api + "/admin/login/", usuario)
+			administrador.senha = md5(administrador.senha);
+			adminService.login(administrador)
 				.then(function success(response) {
-					toastr.success("Bem vindo " + response.data.administrador.nome + "!");
-					localStorage.setItem('admin', JSON.stringify(response.data));
-					$location.path('/admin');
+					toastr.success("Bem vindo " + response.administrador.nome + "!");
+					$location.path('/');
 				}).catch(function error(error) {
-					toastr.error(error.causa || 'Erro no login! Verifique email e senha.');
-					ctrl.dataLoading = false;
+					toastr.error(error.data.causa || 'Erro no login! Verifique email e senha.');
 				});
 		};
 
 		ctrl.register = function (administrador) {
-			ctrl.dataLoading = true;
-			const usuario = angular.copy(administrador);
-			usuario.senha = md5(usuario.senha);
-			$http.post(endPointsService.api + "/admin/cadastrar/", usuario)
+			administrador.senha = md5(administrador.senha);
+			adminService.register(administrador)
 				.then(function success(response) {
 					toastr.success("Administrador cadastrado com sucesso!");
-					$location.path('/login');
+					$location.path('/');
 				}).catch(function error(error) {
-					toastr.error(error.causa || 'Erro no cadastro! Tente novamente mais tarde.');
-					ctrl.dataLoading = false;
+					toastr.error(error.data.causa || 'Erro no cadastro! Tente novamente mais tarde.');
 				});
 		};
+
 	}]);
-  
+
 })();

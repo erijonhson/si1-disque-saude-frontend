@@ -42,6 +42,10 @@ function config($locationProvider, $routeProvider, $httpProvider, $provide) {
 		templateUrl: "view/register.html",
 		controller : "loginCtrl"
 	}).
+	when("/main",{
+		templateUrl: "view/include/main-toolbar.html",
+		controller : "mainToolbarCtrl"
+	}).
 	otherwise({
 		redirectTo: '/'
 	});
