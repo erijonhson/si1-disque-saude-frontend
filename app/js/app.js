@@ -50,12 +50,15 @@ function config($locationProvider, $routeProvider, $httpProvider, $provide) {
 		redirectTo: '/'
 	});
 
-	function jwtInterceptor($q, $location, $rootScope) {
+	function jwtInterceptor($q, $location) {
 		return {
 			'request': function(config) {
-				const admin = JSON.parse(localStorage.getItem('admin'));
-				if (admin && config.url.includes("/administrador")) {
-					config.headers.Authorization = 'Bearer ' + admin.token;
+				const adminStorage = localStorage.getItem('admin');
+				if (adminStorage) {
+					const admin = JSON.parse(adminStorage);
+					if (config.url.includes("/administrador")) {
+						config.headers.Authorization = 'Bearer ' + admin.token;
+					}
 				}
 				return config || $q.when(config);
 			},
@@ -68,18 +71,18 @@ function config($locationProvider, $routeProvider, $httpProvider, $provide) {
 		}
 	}
 
-	$provide.factory('jwtInterceptor', ['$q', '$location', '$rootScope', jwtInterceptor]);
+	$provide.factory('jwtInterceptor', ['$q', '$location', jwtInterceptor]);
 
 	$httpProvider.interceptors.push("jwtInterceptor");
 
 }
 
-run.$inject = ['$rootScope', '$location', '$http', 'endPointsService'];
-function run($rootScope, $location, $http, endPointsService) {
+run.$inject = ['$rootScope', '$location', '$http', 'endPointsService', 'adminService'];
+function run($rootScope, $location, $http, endPointsService, adminService) {
 	$rootScope.$on('$locationChangeStart', function (event, next, current) {
 		// redirect to login page if not logged in and trying to access a restricted page
 		const authorizedPage = $.inArray($location.path(), endPointsService.unauthorized) === -1;
-		const loggedIn = JSON.parse(localStorage.getItem('admin'));
+		const loggedIn = adminService.getAdminLogado();
 		if (!authorizedPage && !loggedIn) {
 			$location.path('/login');
 		}
