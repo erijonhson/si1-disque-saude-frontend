@@ -1,14 +1,17 @@
-<div class="container center-block">
+
+<div class="container center-block" ng-controller="registerComplaintCtrl as ctrl">
     <div>
-         <form name="complaintForm">
-            <div class="col-md-5 col-md-offset-3">
+     <form name="complaintForm">
+        <div class="col-md-5 col-md-offset-3">
                 <fieldset>
                     <legend>Dados da Queixa</legend>
+                    <!-- Div de teste abaixo-->
+                    <!-- <div>{{complaint}}</div> -->
                     <!--Description field-->
                     <div class="form-group row">
                         <label for="inputDescription" class="col-sm-2 col-form-label">Descrição:</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" name="description" id="inputDescription" ng-model="complaint.descricao"></textarea>
+                        <textarea class="form-control" name="description" id="inputDescription" ng-model="complaint.descricao" required></textarea>
                         </div>
                     </div>
                 </fieldset>
@@ -18,41 +21,49 @@
                     <div class="form-group row">
                         <label for="inputName" class="col-sm-2 col-form-label">Nome:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="name" id="inputName" ng-model="complaint.solicitante.nome">
+                            <input type="text" class="form-control" name="name" id="inputName" ng-model="complaint.solicitante.nome" required>
                         </div>
                     </div>
                     <!--Email field-->
                     <div class="form-group row">
                         <label for="inputEmail" class="col-sm-2 col-form-label">Email:</label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control" name="email" id="inputEmail" ng-model="complaint.solicitante.email">
+                            <input type="email" class="form-control" name="email" id="inputEmail" ng-model="complaint.solicitante.email" required>
                         </div>
+                        <span ng-show="complaintForm.email.$dirty && complaintForm.email.$error.required" class="help-block">Email obrigatório</span>
                     </div>
                     <legend>Endereço do estabelecimento</legend>
                     <!--Street field-->
                     <div class="form-group row">
                         <label for="inputStreet" class="col-sm-2 col-form-label">Rua:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="street" id="inputStreet" ng-model="complaint.solicitante.rua">
+                            <input type="text" class="form-control" name="street" id="inputStreet" ng-model="complaint.endereco.rua" required>
+                        </div>
+                    </div>
+                    <!--Neighborhood field-->
+                    <div class="form-group row">
+                        <label for="neighborhoodStreet" class="col-sm-2 col-form-label">Bairro:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="neighborhood" id="inputNeighborhood" ng-model="complaint.endereco.bairro" required>
                         </div>
                     </div>
                     <!--City field-->
                     <div class="form-group row">
                         <label for="inputCity" class="col-sm-2 col-form-label">Cidade:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="city" id="inputCity" ng-model="complaint.solicitante.cidade">
+                            <input type="text" class="form-control" name="city" id="inputCity" ng-model="complaint.endereco.cidade" required>
                         </div>
                     </div>
                     <!--UF field-->
                     <div class="form-group row">
                         <label for="inputUf" class="col-sm-2 col-form-label">UF:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="uf" id="inputUf" ng-model="complaint.solicitante.uf">
+                            <input type="text" class="form-control" name="uf" id="inputUf" ng-model="complaint.endereco.uf" required>
                         </div>
                     </div>
                 </fieldset>
-                <button class="btn btn-primary btn-block" ng-click="registerComplaint(complaint)">Adicionar Queixa</button>
-            </div>
-        </form>
-    </div>
+            <button class="btn btn-primary btn-block" ng-disabled="complaintForm.$invalid" ng-click="ctrl.registerComplaint(complaint)">Adicionar Queixa</button>
+        </div>
+    </form>
+</div>
 </div>

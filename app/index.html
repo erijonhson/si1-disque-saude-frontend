@@ -1,64 +1,50 @@
 <!DOCTYPE html>
 <html lang="pt-br" ng-app="vs">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Disque Saúde</title>
-        <meta name="description" content="Disque Saúde - SI1 2017.1">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-        <link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.css">
-        <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css">
-        <link rel="stylesheet" href="assets/css/main.css">
-        <link rel="stylesheet" href="assets/css/animate.css">
-        <link rel="stylesheet" href="assets/css/searchHealthUnit.css">
-        <link rel="stylesheet" type="text/css" href="bower_components/angular-toastr/dist/angular-toastr.css" />
-    </head>
-    <body>
-        <div class="container-fluid">
-            <div class="row-fluid">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <nav class="navbar navbar-inverse">
-                        <div class="container-fluid">
-                            <div class="navbar-header">
-                                <a class="navbar-brand" href="#/!"><i class="fa fa-medkit" aria-hidden="true"></i> VS</a>
-                            </div>
-                            <ul class="nav navbar-nav">
-                                <li><a href="#/!"><i class="fa fa-home"></i> Home</a></li>
-                                <li><a href="#!search_health_unit"><i class="fa fa-search"></i> Consultar Unidade de Saúde</a></li>
-                                <li><a href="#!searchcomplaint"><i class="fa fa-search"></i> Pesquisar Queixa</a></li>
-                                <li><a href="#!searchaverage"><i class="fa fa-search"></i> Pesquisar Média Médico por Paciente</a></li>
-                                <li><a href="#!generalSituationComplaints"><i class="fa fa-search"></i> Situação geral das queixas</a></li>
-                            </ul>
-                            <ul class="nav navbar-nav navbar-right">
-                                <li>
-                                    <a href="#!/complaint/register"><i class="fa fa-plus"></i> Adicionar Queixa</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div ng-view=""></div>
-        </div>
-        <div ng-include="'view/include/footer.html'"></div>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title>Disque Saúde</title>
+		<meta name="description" content="Disque Saúde - SI1 2017.1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+		<link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.css" />
+		<link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/animate.css" />
+		<link rel="stylesheet" href="assets/css/searchHealthUnit.css" />
+		<link rel="stylesheet" type="text/css" href="bower_components/angular-toastr/dist/angular-toastr.css" />
+		<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+	</head>
+	<body>
 
-        <!-- Bower scripts: -->
-        <script src="bower_components/jquery/dist/jquery.js"></script>
-        <script src="bower_components/jquery-ui/jquery-ui.js"></script>
-        <script src="bower_components/angular/angular.js"></script>
-        <script src="bower_components/angular-animate/angular-animate.js"></script>
-        <script src="bower_components/angular-route/angular-route.js"></script>
-        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="bower_components/angular-messages/angular-messages.js"></script>
-        <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+		<div ng-include="'view/include/main-toolbar.html'"></div>
+		
+		<div>
+			<div ng-view=""></div>
+		</div>
 
-        <!-- Application scripts: -->
-        <script src="core/app.js"></script>
-        <script src="core/app.routes.js"></script>
-        <script src="core/app.end-points.js"></script>
-        <script src="core/controller/mainCtrl.js"></script>
-    </body>
+		<div ng-include="'view/include/footer.html'"></div>
+
+		<!-- Bower scripts: -->
+		<script src="bower_components/jquery/dist/jquery.js"></script>
+		<script src="bower_components/jquery-ui/jquery-ui.js"></script>
+		<script src="bower_components/angular/angular.js"></script>
+		<script src="bower_components/angular-animate/angular-animate.js"></script>
+		<script src="bower_components/angular-route/angular-route.js"></script>
+		<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+		<script src="bower_components/angular-messages/angular-messages.js"></script>
+		<script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+
+		<!-- MD5 hash function for JavaScript -->
+		<script src="bower_components/md5/build/md5.min.js"></script>
+
+		<!-- Application scripts: -->
+		<script src="js/app.js"></script>
+		<script src="js/controller/main.ctrl.js"></script>
+		<script src="js/controller/login.ctrl.js"></script>
+		<script src="js/controller/search_health_unit.ctrl.js"></script>
+		<script src="js/service/admin.service.js"></script>
+		<script src="js/service/endpoints.service.js"></script>
+	</body>
 </html>

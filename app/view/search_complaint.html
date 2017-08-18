@@ -1,3 +1,4 @@
+
 <div class="container">
     <div class="jumbotron">
         <form class="form-horizontal">
@@ -27,10 +28,36 @@
                     <ul class="list-group">
                         <li class="list-group-item"><b>Nome: </b> {{complaint.solicitante.nome}}</li>
                         <li class="list-group-item"><b>Email: </b> {{complaint.solicitante.email}}</li>
-                        <li class="list-group-item"><b>Rua: </b> {{complaint.solicitante.rua}}</li>
-                        <li class="list-group-item"><b>Cidade: </b> {{complaint.solicitante.cidade}}</li>
-                        <li class="list-group-item"><b>UF: </b> {{complaint.solicitante.uf}}</li>
                     </ul>
+                    <p>Estabelecimento</p>
+                    <ul class="list-group">
+                        <li class="list-group-item"><b>Rua: </b> {{complaint.endereco.rua}}</li>
+                        <li class="list-group-item"><b>Bairro: </b> {{complaint.endereco.bairro}}</li>
+                        <li class="list-group-item"><b>Cidade: </b> {{complaint.endereco.cidade}}</li>
+                        <li class="list-group-item"><b>UF: </b> {{complaint.endereco.uf}}</li>
+                    </ul>
+                    <hr>
+                    <!-- TODO : adicionar a este espaco comentarios após conclusão do backend -->
+                    <div>
+                        <p>Comentários</p>
+                        <ul class="list-group">
+                            <div name="comentario">
+                                <li class="list-group-item" ng-repeat="comentario in complaint.comentarios">
+                                    {{comentario.descricao}}
+                                </li>
+                            </div>
+                        </ul>
+                    </div>
+                    <div>
+                        <p>Adicionar comentário</p>
+                        <form name="novoComentarioForm" >
+                            <textarea class="form-control" name="novoComentario" ng-trim="true" ng-model="novoComentario.descricao" required></textarea>
+                        </form>
+                        <br>
+                        <button class="btn btn-primary btn-block" ng-disabled="novoComentarioForm.$invalid" ng-click="adicionarComentarioQueixa(novoComentario.descricao, complaint.id)">
+                            Adicionar Comentário
+                        </button>
+                    </div>
                     <hr>
                 </div>
             </div>
