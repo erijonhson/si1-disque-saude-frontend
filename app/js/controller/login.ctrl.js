@@ -19,7 +19,7 @@
 					$location.path('/');
 				}).catch(function error(error) {
 					ctrl.dataLoading = false;
-					toastr.error(error.data.causa || 'Erro no login! Verifique email e senha.');
+					toastr.error(error.data.causa || error.data.message || 'Erro no login! Verifique email e senha.');
 				});
 		};
 
@@ -32,7 +32,7 @@
 					$location.path('/');
 				}).catch(function error(error) {
 					ctrl.dataLoading = false;
-					toastr.error(error.data.causa || 'Erro no cadastro! Tente novamente mais tarde.');
+					toastr.error(error.data.causa || error.data.message || 'Erro no cadastro! Tente novamente mais tarde.');
 				});
 		};
 

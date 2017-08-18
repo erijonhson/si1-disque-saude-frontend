@@ -23,7 +23,7 @@
 					toastr.success("Queixa adicionada com sucesso!");
 					$location.path('/createdcomplaint/' + response.data.id);
 				}).catch(function error(error) {
-					toastr.error(error.data.causa || "Problemas ao tentar adicionar queixa.");
+					toastr.error(error.data.causa || error.data.message || "Problemas ao tentar adicionar queixa.");
 				});
 		}
 	});
@@ -36,7 +36,7 @@
 			$http.get(endPointsService.api + "/geral/medicos/" + id).then(function successCallback(response) {
 				$scope.average = response.data.obj;
 			}).catch(function error(error) {
-				toastr.error(error.data.causa || "Unidade não Encontrada");
+				toastr.error(error.data.causa || error.data.message || "Unidade não Encontrada");
 			});
 		}
 	});
@@ -45,24 +45,24 @@
 
 		$scope.searchComplaint = function (id) {
 			console.log(id);
-			$http.get(endPointsService.api + "/queixa/" + id).then(function successCallback(response) {
-				$scope.complaint = response.data;
-				buscaComentarioQueixa(id);
-				console.log($scope.complaint);
-				console.log("----");
-			}).catch(function error(error) {
-				$scope.complaint = null;
-				toastr.error(error.data.causa);
-			});
+			$http.get(endPointsService.api + "/queixa/" + id)
+				.then(function successCallback(response) {
+					$scope.complaint = response.data;
+					buscaComentarioQueixa(id);
+				}).catch(function error(error) {
+					$scope.complaint = null;
+					toastr.error(error.data.causa);
+				});
 		}
 
 		var buscaComentarioQueixa = function(id) {
 			console.log(endPointsService.api+ "/queixa/comentario/" + id);
-			$http.get(endPointsService.api+ "/queixa/comentario/" + id).then(function successCallback(response) {
-				$scope.complaint.comentarios = response.data;
-			}).catch(function error(error) {
-				toastr.error(error.data.causa || "Sem comentários!");
-			});
+			$http.get(endPointsService.api+ "/queixa/comentario/" + id)
+				.then(function successCallback(response) {
+					$scope.complaint.comentarios = response.data;
+				}).catch(function error(error) {
+					toastr.error(error.data.causa || error.data.message || "Sem comentários!");
+				});
 		}
 
 		// REMOVER ESTA GAMBS
@@ -80,27 +80,10 @@
 					buscaComentarioQueixa(id);
 					$scope.novoComentario.descricao = '';
 				}).catch(function error(error) {
-					toastr.error(error.data.causa || "Problemas ao adicionar comentário");
+					toastr.error(error.data.causa || error.data.message || "Problemas ao adicionar comentário");
 				});
 		}
 
-	});
-	
-	app.controller("searchHealthUnitCtrl", function ($scope, $http, toastr, endPointsService) {
-
-		$scope.units = [];
-
-		$scope.searchHU = function (neighborhood) {
-			$http.get(endPointsService.api + "/unidade/busca?bairro=" + neighborhood)
-			.then(function success(response) {
-				$scope.units = [];
-				$scope.units.push(response.data);
-				console.log("Foram encontradas Unidades de saúde");
-				console.log(response.data);
-			}).catch(function error(error) {
-				toastr.error(error.data.causa || "Erro na busca de unidades");
-			});
-		}
 	});
 	
 	app.controller("generalSituationComplaintsCtrl", function ($scope, $http, toastr, endPointsService) {
@@ -132,7 +115,7 @@
 
 				}
 			}).catch(function error(error) {
-				toastr.error(error.data.causa || "Erro na busca de unidades");
+				toastr.error(error.data.causa || error.data.message || "Erro na busca de unidades");
 			});
 		}
 

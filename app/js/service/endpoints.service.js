@@ -15,10 +15,7 @@
 
 		ctrl.adminLogin = ctrl.api + '/admin/login/';
 		ctrl.adminRegister = ctrl.api + '/admin/cadastrar/';
-
-		ctrl.statusOk = function (status) {
-			return (status >= 200 && status <= 299);
-		}
+		ctrl.buscarUnidadesDeSaude = ctrl.api + "/unidade/busca?bairro="
 
 	});
 
