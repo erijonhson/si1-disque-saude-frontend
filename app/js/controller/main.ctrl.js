@@ -68,7 +68,6 @@
 				});
 		}
 
-		// REMOVER ESTA GAMBS
 		$scope.novoComentario = {descricao : ''};
 
 		$scope.adicionarComentarioQueixa = function(descricao, id) {
@@ -94,7 +93,7 @@
 		$scope.situation = "";
 
 		var getGeneralSituationComplaints = function () {
-			$http.get(endPointsService.api + "/geral/situacao")
+			$http.get(endPointsService.api + "/administrador/geral/situacao")
 			.then(function success(response) {
 
 				if(response.data == 0) {
