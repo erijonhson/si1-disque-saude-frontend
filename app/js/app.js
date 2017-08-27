@@ -53,14 +53,15 @@ function config($locationProvider, $routeProvider, $httpProvider, $provide) {
 	function jwtInterceptor($q, $location) {
 		return {
 			'request': function(config) {
-				const adminStorage = localStorage.getItem('admin');
-				if (adminStorage) {
-					const admin = JSON.parse(adminStorage);
-					if (config.url.includes("/administrador")) {
+				config.headers = config.headers || {};
+				if (config.url.includes("/administrador")) {
+					const adminStorage = localStorage.getItem('admin');
+					if (adminStorage !== "null") {
+						const admin = JSON.parse(adminStorage);
 						config.headers.Authorization = 'Bearer ' + admin.token;
 					}
 				}
-				return config || $q.when(config);
+				return config;
 			},
 			'responseError': function (response){
 				if(response.status === 401) {
