@@ -10,8 +10,8 @@
 						<li><a href="#/!"><i class="fa fa-home"></i> Home</a></li>
 						<li><a href="#!search_health_unit"><i class="fa fa-search"></i> Consultar Unidade de Saúde</a></li>
 						<li><a href="#!searchcomplaint"><i class="fa fa-search"></i> Pesquisar Queixa</a></li>
-						<li><a href="#!searchaverage"><i class="fa fa-search"></i> Pesquisar Média Médico por Paciente</a></li>
-						<li><a href="#!generalSituationComplaints"><i class="fa fa-search"></i> Situação geral das queixas</a></li>
+						<li><a href="#!searchaverage" ng-if="ctrl.adminEstaLogado()"><i class="fa fa-search"></i> Pesquisar Média Médico por Paciente</a></li>
+						<li><a href="#!generalSituationComplaints" ng-if="ctrl.adminEstaLogado()"><i class="fa fa-search"></i> Situação geral das queixas</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<li>
