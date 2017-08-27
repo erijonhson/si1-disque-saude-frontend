@@ -25,8 +25,8 @@
 				}).catch(function error(error) {
 					toastr.error(error.data.causa || error.data.message || "Problemas ao tentar adicionar queixa.");
 				});
-		}
-	});
+			}
+		});
 	
 	app.controller("searchAverangeCtrl", function ($scope, $http, toastr, endPointsService) {
 
@@ -34,38 +34,28 @@
 
 		$scope.searchAveragePerPatient = function (id) {
 			$http.get(endPointsService.api + "/geral/medicos/" + id)
-				.then(function successCallback(response) {
-					$scope.average = response.data;
-					if ($scope.average == 0.0)
-						toastr.success("Média Médico Por Paciente da Unidade Pesquisada é 0");
-				}).catch(function error(error) {
-					toastr.error(error.data.causa || error.data.message || "Unidade não Encontrada");
-				});
+			.then(function successCallback(response) {
+				$scope.average = response.data;
+				if ($scope.average == 0.0)
+					toastr.success("Média Médico Por Paciente da Unidade Pesquisada é 0");
+			}).catch(function error(error) {
+				toastr.error(error.data.causa || error.data.message || "Unidade não Encontrada");
+			});
 		}
 	});
 	
-	app.controller("searchComplaintCtrl", function ($scope, $http, toastr, endPointsService) {
+	app.controller("searchComplaintCtrl", function ($scope, $http, toastr, endPointsService, adminService) {
 
 		$scope.searchComplaint = function (id) {
 			console.log(id);
 			$http.get(endPointsService.api + "/queixa/" + id)
-				.then(function successCallback(response) {
-					$scope.complaint = response.data;
-					buscaComentarioQueixa(id);
-				}).catch(function error(error) {
-					$scope.complaint = null;
-					toastr.error(error.data.causa);
-				});
-		}
-
-		var buscaComentarioQueixa = function(id) {
-			console.log(endPointsService.api+ "/queixa/comentario/" + id);
-			$http.get(endPointsService.api+ "/queixa/comentario/" + id)
-				.then(function successCallback(response) {
-					$scope.complaint.comentarios = response.data;
-				}).catch(function error(error) {
-					toastr.error(error.data.causa || error.data.message || "Sem comentários!");
-				});
+			.then(function successCallback(response) {
+				$scope.complaint = response.data;
+				buscaComentarioQueixa(id);
+			}).catch(function error(error) {
+				$scope.complaint = null;
+				toastr.error(error.data.causa);
+			});
 		}
 
 		$scope.novoComentario = {descricao : ''};
@@ -73,7 +63,6 @@
 		$scope.adicionarComentarioQueixa = function(descricao, id) {
 
 			var copiaDescricao = angular.copy(descricao);
-			console.log($scope.novoComentario);
 
 			$http.post(endPointsService.api + "/queixa/comentario/"+id, JSON.stringify(copiaDescricao))
 			.then(function success(response) {
@@ -81,11 +70,67 @@
 					toastr.success("Comentário adicionado com sucesso!");
 					buscaComentarioQueixa(id);
 					$scope.novoComentario.descricao = '';
-				}).catch(function error(error) {
-					toastr.error(error.data.causa || error.data.message || "Problemas ao adicionar comentário");
-				});
+			}).catch(function error(error) {
+				toastr.error(error.data.causa || error.data.message || "Problemas ao adicionar comentário");
+			});
 		}
 
+		$scope.novaSituacao = {valor: ''};
+
+		$scope.atualizaSituacao = function(novaSituacao){
+			if(novaSituacao == "aberta") {
+				reabrirQueixa()
+			} else if(novaSituacao = "fechada") {
+				fecharQueixa()
+			}
+
+		}
+
+		$scope.adminEstaLogado = function () {
+			return !!adminService.getAdminLogado();
+		}
+
+		var reabrirQueixa = function() {
+
+		}
+
+		var fecharQueixa = function(){
+			console.log($scope.novaSituacao)
+			delete $scope.novaSituacao.valor;
+			$http.post(endPointsService.api + "/administrador/queixa/fechamento", JSON.stringify($scope.complaint))
+			.then(function success(response) {
+				// add mensage
+				toastr.success("Situação da queixa alterada com sucesso");
+				$scope.complaint = response.data;
+			}).catch(function error(error) {
+				toastr.error(error.data.causa || error.data.message || "Problemas ao alterar situação da queixa");
+			});
+
+		}
+
+		var reabrirQueixa = function(){
+			console.log($scope.novaSituacao)
+			delete $scope.novaSituacao.valor;
+			$http.post(endPointsService.api + "/administrador/queixa/reabrir", JSON.stringify($scope.complaint))
+			.then(function success(response) {
+				// add mensage
+				toastr.success("Situação da queixa alterada com sucesso");
+				$scope.complaint = response.data;
+			}).catch(function error(error) {
+				toastr.error(error.data.causa || error.data.message || "Problemas ao alterar situação da queixa");
+			});
+
+		}
+
+		var buscaComentarioQueixa = function(id) {
+			console.log(endPointsService.api+ "/queixa/comentario/" + id);
+			$http.get(endPointsService.api+ "/queixa/comentario/" + id)
+			.then(function successCallback(response) {
+				$scope.complaint.comentarios = response.data;
+			}).catch(function error(error) {
+				toastr.error(error.data.causa || error.data.message || "Sem comentários!");
+			});
+		}
 	});
 	
 	app.controller("generalSituationComplaintsCtrl", function ($scope, $http, toastr, endPointsService) {
