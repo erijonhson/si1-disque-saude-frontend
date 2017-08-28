@@ -28,22 +28,6 @@
 			}
 		});
 	
-	app.controller("searchAverangeCtrl", function ($scope, $http, toastr, endPointsService) {
-
-		$scope.average = null;
-
-		$scope.searchAveragePerPatient = function (id) {
-			$http.get(endPointsService.api + "/geral/medicos/" + id)
-			.then(function successCallback(response) {
-				$scope.average = response.data;
-				if ($scope.average == 0.0)
-					toastr.success("Média Médico Por Paciente da Unidade Pesquisada é 0");
-			}).catch(function error(error) {
-				toastr.error(error.data.causa || error.data.message || "Unidade não Encontrada");
-			});
-		}
-	});
-	
 	app.controller("searchComplaintCtrl", function ($scope, $http, toastr, endPointsService, adminService) {
 
 		$scope.searchComplaint = function (id) {

@@ -7,9 +7,6 @@ var app = angular.module(
 config.$inject = ['$locationProvider', '$routeProvider', '$httpProvider', '$provide'];
 function config($locationProvider, $routeProvider, $httpProvider, $provide) {
 	$routeProvider.
-	when("/",{
-		templateUrl: "view/search.html"
-	}).
 	when("/complaint/register", {
 		templateUrl: "view/registerComplaint.html",
 		controller : "registerComplaintCtrl",
@@ -47,7 +44,7 @@ function config($locationProvider, $routeProvider, $httpProvider, $provide) {
 		controller : "mainToolbarCtrl"
 	}).
 	otherwise({
-		redirectTo: '/'
+		redirectTo: '/generalSituationComplaints'
 	});
 
 	function jwtInterceptor($q, $location) {
