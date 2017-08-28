@@ -48,7 +48,7 @@ function config($locationProvider, $routeProvider, $httpProvider, $provide) {
 		controller : "registerHealthUnitCtrl"
 	}).
 	otherwise({
-		redirectTo: '/generalSituationComplaints'
+		redirectTo: '/searchcomplaint'
 	});
 
 	function jwtInterceptor($q, $location) {

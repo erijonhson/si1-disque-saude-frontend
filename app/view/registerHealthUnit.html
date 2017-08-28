@@ -5,62 +5,89 @@
 		<form name="form" >
 			<fieldset>
 			<!--
-			"atendentes" : 8,
-			"taxaDiariaAtendimentos" : 2
+			Posto de Saúde
+				"atendentes" : 8,
+				"taxaDiariaAtendimentos" : 2
+			Hospital
+				numeroDeMedicos
+				numeroDePacientesPorDia
 			-->
 				<legend>Unidade de Saúde</legend>
-				<div>
-                    <label  class="radio-inline"><input type="radio" ng-model="unidade.type" value='Posto'>Posto de Saúde</label>
-                    <label class="radio-inline"><input type="radio" ng-model="unidade.type" value='Hospital'>Hospital</label>
-                </div>
+				<label  class="radio-inline"><input type="radio" ng-model="ctrl.unidade.type" value='Posto'>Posto de Saúde</label>
+				<label class="radio-inline"><input type="radio" ng-model="ctrl.unidade.type" value='Hospital'>Hospital</label>
 				<div class="form-group" ng-class="{ 'has-error': form.descricao.$dirty && form.descricao.$error.required }">
 					<label for="descricao">Nome</label>
-					<input type="text" name="descricao" id="descricao" class="form-control" ng-model="unidade.descricao" placeholder="Descrição" required />
+					<input type="text" name="descricao" id="descricao" class="form-control" ng-model="ctrl.unidade.descricao" placeholder="Descrição" required />
 					<span ng-show="form.descricao.$dirty && form.descricao.$error.required" class="help-block">Descrição obrigatória</span>
+				</div>
+				<div ng-if="ctrl.unidade.type == 'Posto'">
+					<div class="form-group" ng-class="{ 'has-error': form.atendentes.$dirty && form.atendentes.$error.required }">
+						<label for="atendentes">Quantidade de Atendentes</label>
+						<input type="text" name="atendentes" id="atendentes" class="form-control" ng-model="ctrl.unidade.atendentes" placeholder="Quantidade de Atendentes" required />
+						<span ng-show="form.atendentes.$dirty && form.atendentes.$error.required" class="help-block">Quantidade de Atendentes obrigatório</span>
+					</div>
+					<div class="form-group" ng-class="{ 'has-error': form.taxaDiariaAtendimentos.$dirty && form.taxaDiariaAtendimentos.$error.required }">
+						<label for="taxaDiariaAtendimentos">Taxa Diária de Atendimentos</label>
+						<input type="text" name="taxaDiariaAtendimentos" id="taxaDiariaAtendimentos" class="form-control" ng-model="ctrl.unidade.taxaDiariaAtendimentos" placeholder="Quantidade" required />
+						<span ng-show="form.taxaDiariaAtendimentos.$dirty && form.taxaDiariaAtendimentos.$error.required" class="help-block">Taxa Diária de Atendimentos obrigatório</span>
+					</div>
+				</div>
+				<div ng-if="ctrl.unidade.type == 'Hospital'">
+					<div class="form-group" ng-class="{ 'has-error': form.numeroDeMedicos.$dirty && form.numeroDeMedicos.$error.required }">
+						<label for="numeroDeMedicos">Número de Médicos</label>
+						<input type="text" name="numeroDeMedicos" id="numeroDeMedicos" class="form-control" ng-model="ctrl.unidade.numeroDeMedicos" placeholder="Quantidade de numeroDeMedicos" required />
+						<span ng-show="form.numeroDeMedicos.$dirty && form.numeroDeMedicos.$error.required" class="help-block">Número de Médicos obrigatório</span>
+					</div>
+					<div class="form-group" ng-class="{ 'has-error': form.numeroDePacientesPorDia.$dirty && form.numeroDePacientesPorDia.$error.required }">
+						<label for="numeroDePacientesPorDia">Ńúmero de Pacientes por dia</label>
+						<input type="text" name="numeroDePacientesPorDia" id="numeroDePacientesPorDia" class="form-control" ng-model="ctrl.unidade.numeroDePacientesPorDia" placeholder="Quantidade" required />
+						<span ng-show="form.numeroDePacientesPorDia.$dirty && form.numeroDePacientesPorDia.$error.required" class="help-block">Ńúmero de Pacientes por dia obrigatório</span>
+					</div>
 				</div>
 				<div class="form-group" >
 					<label for="esp">Especialidade</label>
 					<input type="text" name="esp" id="esp" class="form-control" ng-model="ctrl.esp" placeholder="Especialidade" />
-					<button ng-click="ctrl.addEspecialidade()">Add</button>
+					<button class="btn btn-default" ng-click="ctrl.addEspecialidade()">Add</button>
 				</div>
 				<p ng-if="ctrl.especialidades.length > 0" >Especialidades da unidade de saúde:
 					<span class="badge badge-default" ng-repeat="esp in ctrl.especialidades">
 						<b>{{esp.descricao}}</b>
 					</span>
 				</p>
+				<!-- Inflar select aqui -->
 
 				<legend>Endereço do estabelecimento</legend>
 				<!--Street field-->
 				<div class="form-group row">
 					<label for="inputStreet" class="col-sm-2 col-form-label">Rua:</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="street" id="inputStreet" ng-model="unidade.local.rua" required>
+						<input type="text" class="form-control" name="street" id="inputStreet" ng-model="ctrl.unidade.local.rua" required>
 					</div>
 				</div>
 				<!--Neighborhood field-->
 				<div class="form-group row">
 					<label for="neighborhoodStreet" class="col-sm-2 col-form-label">Bairro:</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="neighborhood" id="inputNeighborhood" ng-model="unidade.local.bairro" required>
+						<input type="text" class="form-control" name="neighborhood" id="inputNeighborhood" ng-model="ctrl.unidade.local.bairro" required>
 					</div>
 				</div>
 				<!--City field-->
 				<div class="form-group row">
 					<label for="inputCity" class="col-sm-2 col-form-label">Cidade:</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="city" id="inputCity" ng-model="unidade.local.cidade" required>
+						<input type="text" class="form-control" name="city" id="inputCity" ng-model="ctrl.unidade.local.cidade" required>
 					</div>
 				</div>
 				<!--UF field-->
 				<div class="form-group row">
 					<label for="inputUf" class="col-sm-2 col-form-label">UF:</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="uf" id="inputUf" ng-model="unidade.local.uf" required />
+						<input type="text" class="form-control" name="uf" id="inputUf" ng-model="ctrl.unidade.local.uf" required />
 					</div>
 				</div>
 				<button class="btn btn-primary btn-block" 
 					ng-disabled="form.$invalid" 
-                    ng-click="ctrl.registerHU(unidade)">Adicionar Unidade de Saúde</button>
+					ng-click="ctrl.registerHU()">Adicionar Unidade de Saúde</button>
 			</fieldset>
 		</form>
 	</div>

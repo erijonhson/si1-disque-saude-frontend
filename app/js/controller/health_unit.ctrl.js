@@ -21,12 +21,15 @@
 	app.controller("registerHealthUnitCtrl", function ($http, toastr, endPointsService) {
 
 		var ctrl = this;
+		ctrl.unidade = {"type": "Posto"};
 		ctrl.esp = "";
 		ctrl.especialidades = [];
 
-		ctrl.registerHU = function (healthUnit) {
-			healthUnit.especialidades = ctrl.especialidades;
-			$http.post(endPointsService.adicionarUnidadeDeSaude, healthUnit)
+		ctrl.registerHU = function () {
+			console.log(ctrl.especialidades);
+			ctrl.unidade.especialidades = ctrl.especialidades;
+			console.log(ctrl.unidade);
+			$http.post(endPointsService.adicionarUnidadeDeSaude, ctrl.unidade)
 				.then(function success(response) {
 					toastr.success("Unidade de Saúde Cadastrada");
 					console.log('Vai Dragão, incendeia!');
