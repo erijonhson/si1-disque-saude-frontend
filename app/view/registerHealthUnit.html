@@ -1,0 +1,67 @@
+<!-- http://jasonwatmore.com/post/2015/03/10/angularjs-user-registration-and-login-example-tutorial -->
+
+<div class="container center" ng-controller="registerHealthUnitCtrl as ctrl">
+	<div class="col-md-6 col-md-offset-3">
+		<form name="form" >
+			<fieldset>
+			<!--
+			"atendentes" : 8,
+			"taxaDiariaAtendimentos" : 2
+			-->
+				<legend>Unidade de Saúde</legend>
+				<div>
+                    <label  class="radio-inline"><input type="radio" ng-model="unidade.type" value='Posto'>Posto de Saúde</label>
+                    <label class="radio-inline"><input type="radio" ng-model="unidade.type" value='Hospital'>Hospital</label>
+                </div>
+				<div class="form-group" ng-class="{ 'has-error': form.descricao.$dirty && form.descricao.$error.required }">
+					<label for="descricao">Nome</label>
+					<input type="text" name="descricao" id="descricao" class="form-control" ng-model="unidade.descricao" placeholder="Descrição" required />
+					<span ng-show="form.descricao.$dirty && form.descricao.$error.required" class="help-block">Descrição obrigatória</span>
+				</div>
+				<div class="form-group" >
+					<label for="esp">Especialidade</label>
+					<input type="text" name="esp" id="esp" class="form-control" ng-model="ctrl.esp" placeholder="Especialidade" />
+					<button ng-click="ctrl.addEspecialidade()">Add</button>
+				</div>
+				<p ng-if="ctrl.especialidades.length > 0" >Especialidades da unidade de saúde:
+					<span class="badge badge-default" ng-repeat="esp in ctrl.especialidades">
+						<b>{{esp.descricao}}</b>
+					</span>
+				</p>
+
+				<legend>Endereço do estabelecimento</legend>
+				<!--Street field-->
+				<div class="form-group row">
+					<label for="inputStreet" class="col-sm-2 col-form-label">Rua:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="street" id="inputStreet" ng-model="unidade.local.rua" required>
+					</div>
+				</div>
+				<!--Neighborhood field-->
+				<div class="form-group row">
+					<label for="neighborhoodStreet" class="col-sm-2 col-form-label">Bairro:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="neighborhood" id="inputNeighborhood" ng-model="unidade.local.bairro" required>
+					</div>
+				</div>
+				<!--City field-->
+				<div class="form-group row">
+					<label for="inputCity" class="col-sm-2 col-form-label">Cidade:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="city" id="inputCity" ng-model="unidade.local.cidade" required>
+					</div>
+				</div>
+				<!--UF field-->
+				<div class="form-group row">
+					<label for="inputUf" class="col-sm-2 col-form-label">UF:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="uf" id="inputUf" ng-model="unidade.local.uf" required />
+					</div>
+				</div>
+				<button class="btn btn-primary btn-block" 
+					ng-disabled="form.$invalid" 
+                    ng-click="ctrl.registerHU(unidade)">Adicionar Unidade de Saúde</button>
+			</fieldset>
+		</form>
+	</div>
+</div>

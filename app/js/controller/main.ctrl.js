@@ -61,13 +61,15 @@
 
 		$scope.novaSituacao = {valor: ''};
 
-		$scope.atualizaSituacao = function(novaSituacao){
-			if(novaSituacao == "aberta") {
-				reabrirQueixa()
-			} else if(novaSituacao = "fechada") {
-				fecharQueixa()
-			}
-
+		$scope.atualizaSituacao = function(){
+			$http.post(endPointsService.api + "/administrador/queixa/fechamento", JSON.stringify($scope.complaint))
+			.then(function success(response) {
+				// add mensage
+				toastr.success("Situação da queixa alterada com sucesso");
+				$scope.complaint = response.data;
+			}).catch(function error(error) {
+				toastr.error(error.data.causa || error.data.message || "Problemas ao alterar situação da queixa");
+			});
 		}
 
 		$scope.adminEstaLogado = function () {

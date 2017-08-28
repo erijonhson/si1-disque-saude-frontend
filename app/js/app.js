@@ -43,6 +43,10 @@ function config($locationProvider, $routeProvider, $httpProvider, $provide) {
 		templateUrl: "view/include/main-toolbar.html",
 		controller : "mainToolbarCtrl"
 	}).
+	when("/registerHealthUnit",{
+		templateUrl: "view/registerHealthUnit.html",
+		controller : "registerHealthUnitCtrl"
+	}).
 	otherwise({
 		redirectTo: '/generalSituationComplaints'
 	});

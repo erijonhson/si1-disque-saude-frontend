@@ -26,9 +26,7 @@
                     <p>Situação: <span class="badge">{{complaint.situacao}}</span></p>
                     <!-- admin pode alterar queixa -->
                     <div ng-if="adminEstaLogado()">
-                        <label  class="radio-inline"><input type="radio" ng-model="novaSituacao.valor" value='aberta'>Aberta</label>
-                        <label class="radio-inline"><input type="radio" ng-model="novaSituacao.valor" value='fechada'>Fechada</label>
-                        <button ng-disabled="!novaSituacao.valor" type="submit" class="btn btn-primary" ng-click="atualizaSituacao(novaSituacao.valor)">
+                        <button type="submit" class="btn btn-primary" ng-click="atualizaSituacao()">
                             <i class="fa fa-refresh" aria-hidden="true"></i> Atualizar
                         </button>
                     </div>
