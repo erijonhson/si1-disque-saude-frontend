@@ -17,7 +17,8 @@
 		ctrl.adminRegister = ctrl.api + '/admin/cadastrar/';
 
 		ctrl.adicionarUnidadeDeSaude = ctrl.api + "/administrador/unidade/";
-		ctrl.buscarUnidadesDeSaude = ctrl.api + "/unidade/busca?bairro=";
+		ctrl.buscarUnidadesDeSaudePorBairro = ctrl.api + "/unidade/busca?bairro=";
+		ctrl.buscarUnidadesDeSaudePorEspecialidade = ctrl.api + "/unidade/busca/";
 		ctrl.buscarMediaDeMedicosPorUnidadeDeSaude = ctrl.api + "/administrador/geral/medicos/";
 
 	});

@@ -8,7 +8,16 @@
 		ctrl.units = [];
 
 		ctrl.searchHU = function (neighborhood) {
-			$http.get(endPointsService.buscarUnidadesDeSaude + neighborhood)
+			$http.get(endPointsService.buscarUnidadesDeSaudePorBairro + neighborhood)
+				.then(function success(response) {
+					ctrl.units = response.data;
+				}).catch(function error(error) {
+					toastr.error(error.data.causa || error.data.message || "Erro na busca de unidades");
+				});
+		}
+
+		ctrl.searchHUByEsp = function (idEspecialidade) {
+			$http.get(endPointsService.buscarUnidadesDeSaudePorEspecialidade + idEspecialidade)
 				.then(function success(response) {
 					ctrl.units = response.data;
 				}).catch(function error(error) {
