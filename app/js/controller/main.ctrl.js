@@ -62,12 +62,13 @@
 		$scope.novaSituacao = {valor: ''};
 
 		$scope.atualizaSituacao = function(){
+			var copiaComentarios = angular.copy($scope.complaint.comentarios);
 			$http.post(endPointsService.api + "/administrador/queixa/fechamento", JSON.stringify($scope.complaint))
 			.then(function success(response) {
 				// add mensage
 				toastr.success("Situação da queixa alterada com sucesso");
 				$scope.complaint = response.data;
-				buscaComentarioQueixa($scope.complaint.id);
+				$scope.complaint.comentarios = copiaComentarios;
 			}).catch(function error(error) {
 				toastr.error(error.data.causa || error.data.message || "Problemas ao alterar situação da queixa");
 			});
@@ -75,10 +76,6 @@
 
 		$scope.adminEstaLogado = function () {
 			return !!adminService.getAdminLogado();
-		}
-
-		var reabrirQueixa = function() {
-
 		}
 
 		var fecharQueixa = function(){
