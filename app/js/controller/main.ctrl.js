@@ -67,6 +67,7 @@
 				// add mensage
 				toastr.success("Situação da queixa alterada com sucesso");
 				$scope.complaint = response.data;
+				buscaComentarioQueixa($scope.complaint.id);
 			}).catch(function error(error) {
 				toastr.error(error.data.causa || error.data.message || "Problemas ao alterar situação da queixa");
 			});
